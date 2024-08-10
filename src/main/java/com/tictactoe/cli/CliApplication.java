@@ -44,18 +44,26 @@ public class CliApplication {
         System.out.println("The TicTacToe Game");
         System.out.println("\n");
         for (int col = 0; col <= Board.SIZE; col++) {
-            for (int row = 0; row <= Board.SIZE; row++) {
-                System.out.printf(" %s ", presenter.getPlayerMark(game.getBoard().get(col, row)));
-                if (row  < Board.SIZE) {
-                    System.out.print("|");
-                }
-            }
-            System.out.println();
-            if (col < Board.SIZE) {
-                System.out.println("-----------");
-            }
+            renderRows(col);
         }
         System.out.println("\n");
         System.out.println("Is " + presenter.getPlayerName(game.whoseTurn()) + " turn!");
+    }
+
+    private static void renderRows(int col) {
+        for (int row = 0; row <= Board.SIZE; row++) {
+            rednerRow(col, row);
+        }
+        System.out.println();
+        if (col < Board.SIZE) {
+            System.out.println("-----------");
+        }
+    }
+
+    private static void rednerRow(int col, int row) {
+        System.out.printf(" %s ", presenter.getPlayerMark(game.getBoard().get(col, row)));
+        if (row < Board.SIZE) {
+            System.out.print("|");
+        }
     }
 }
