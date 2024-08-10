@@ -4,7 +4,7 @@ import com.tictactoe.view.cli.CliViewEngine;
 import com.tictactoe.game.Game;
 import com.tictactoe.view.ViewEngine;
 
-public class CliApplication {
+public class Application {
 
     private static final Game game = new Game();
     private static final ViewEngine view = new CliViewEngine();
