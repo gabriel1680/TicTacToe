@@ -15,7 +15,6 @@ public class CliApplication {
 
     public static void main(String[] args) {
         while (!gameOver) {
-            clear();
             renderBoard();
             final var player = game.whoseTurn();
             makeMove(scanner.next());
@@ -26,21 +25,8 @@ public class CliApplication {
         }
     }
 
-    private static void renderWinner(Player player) {
-        System.out.println(presenter.getWinner(player));
-    }
-
-    private static void clear() {
-        System.out.print("\033c");
-        System.out.flush();
-    }
-
-    private static void makeMove(String move) {
-        var moves = move.split(",");
-        game.takeTurn(Integer.parseInt(moves[0]), Integer.parseInt(moves[1]));
-    }
-
     private static void renderBoard() {
+        clear();
         System.out.println("The TicTacToe Game");
         System.out.println("\n");
         for (int col = 0; col <= Board.SIZE; col++) {
@@ -50,9 +36,14 @@ public class CliApplication {
         System.out.println("Is " + presenter.getPlayerName(game.whoseTurn()) + " turn!");
     }
 
+    private static void clear() {
+        System.out.print("\033c");
+        System.out.flush();
+    }
+
     private static void renderRows(int col) {
         for (int row = 0; row <= Board.SIZE; row++) {
-            rednerRow(col, row);
+            renderRow(col, row);
         }
         System.out.println();
         if (col < Board.SIZE) {
@@ -60,10 +51,19 @@ public class CliApplication {
         }
     }
 
-    private static void rednerRow(int col, int row) {
+    private static void renderRow(int col, int row) {
         System.out.printf(" %s ", presenter.getPlayerMark(game.getBoard().get(col, row)));
         if (row < Board.SIZE) {
             System.out.print("|");
         }
+    }
+
+    private static void renderWinner(Player player) {
+        System.out.println(presenter.getWinner(player));
+    }
+
+    private static void makeMove(String move) {
+        var moves = move.split(",");
+        game.takeTurn(Integer.parseInt(moves[0]), Integer.parseInt(moves[1]));
     }
 }
