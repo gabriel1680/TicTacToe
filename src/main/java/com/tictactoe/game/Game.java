@@ -29,7 +29,7 @@ public class Game {
         return board;
     }
 
-    public boolean isWin() {
-        return rules.isWin(board, whoseTurn());
+    public boolean isWin(Player player) {
+        return rules.isWin(board, player);
     }
 }
