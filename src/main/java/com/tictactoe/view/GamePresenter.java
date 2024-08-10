@@ -1,4 +1,4 @@
-package com.tictactoe.cli;
+package com.tictactoe.view;
 
 import com.tictactoe.game.Player;
 
