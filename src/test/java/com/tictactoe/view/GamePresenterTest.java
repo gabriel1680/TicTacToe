@@ -1,7 +1,6 @@
-package com.tictactoe.cli;
+package com.tictactoe.view;
 
 import com.tictactoe.game.Player;
-import com.tictactoe.view.GamePresenter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

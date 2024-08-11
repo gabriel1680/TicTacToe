@@ -1,8 +1,5 @@
-package com.tictactoe;
+package com.tictactoe.game;
 
-import com.tictactoe.game.Board;
-import com.tictactoe.game.GameRules;
-import com.tictactoe.game.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
