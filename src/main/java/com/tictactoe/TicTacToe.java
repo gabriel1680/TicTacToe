@@ -1,39 +1,35 @@
 package com.tictactoe;
 
 import com.tictactoe.game.Game;
-import com.tictactoe.game.Player;
 import com.tictactoe.view.ViewEngine;
 
 public class TicTacToe {
     private final Game game;
     private final ViewEngine view;
-
-    private Player lastPlayer;
-    private boolean gameOver;
+    private final GameState state;
 
     public TicTacToe(ViewEngine aView) {
         game = new Game();
+        state = new GameState();
         view = aView;
-        gameOver = false;
-        lastPlayer  = game.whoseTurn();
     }
 
     public void start() {
-        while (!gameOver)
+        while (!state.isGameOver())
             ticGameCycle();
-        view.renderWinner(lastPlayer);
+        view.renderWinner(state.getLastPlayer());
     }
 
     private void ticGameCycle() {
         view.renderBoard(game);
-        lastPlayer = game.whoseTurn();
-        takeTurn();
-        if (game.isWin(lastPlayer)) {
-            gameOver = true;
+        state.setLastPlayer(game.whoseTurn());
+        tryPlayerMakeAMove();
+        if (game.isWin(state.getLastPlayer())) {
+            state.setGameOver();
         }
     }
 
-    private void takeTurn() {
+    private void tryPlayerMakeAMove() {
         try {
             final var move = view.getUserMove();
             game.takeTurn(move.col(), move.row());
