@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         final var scanner = new Scanner(System.in);
-        final var console = new Console(scanner);
+        final var console = new Console(scanner, System.out);
         final var view = new CliViewEngine(console);
         final var game = new TicTacToe(view);
         game.start();

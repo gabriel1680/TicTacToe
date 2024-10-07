@@ -6,10 +6,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.io.PrintStream;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -18,38 +17,41 @@ class ConsoleTest {
     @Mock
     private Scanner scanner;
 
+    @Mock
+    private PrintStream out;
+
     @InjectMocks
-    private TestableConsole sut;
+    private Console sut;
 
     @Test
     void printBlankLine() {
         sut.printBlankLine();
-        assertEquals("\n", sut.printlnCalledWith);
+        verify(out).println("\n");
     }
 
     @Test
     void printEmptyLine() {
         sut.printLine();
-        assertEquals("", sut.printlnCalledWith);
+        verify(out).println();
     }
 
     @Test
     void printLine() {
         sut.printLine("a");
-        assertEquals("a", sut.printlnCalledWith);
+        verify(out).println("a");
     }
 
     @Test
     void print() {
         sut.print("x");
-        assertEquals("x", sut.doPrintCalledWith);
+        verify(out).print("x");
     }
 
     @Test
     void clear() {
         sut.clear();
-        assertEquals("\033c", sut.printlnCalledWith);
-        assertNull(sut.doPrintCalledWith);
+        verify(out).print("\033c");
+        verify(out).flush();
     }
 
     @Test
